@@ -7,7 +7,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 class OrdemDeServicoApplicationTests {
 
     @Test
-    void contextLoads() {
+    void main() {
+        OrdemDeServicoApplication.main(new String[] {});
     }
 
 }
