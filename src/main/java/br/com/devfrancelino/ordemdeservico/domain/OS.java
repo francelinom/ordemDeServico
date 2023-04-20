@@ -2,19 +2,35 @@ package br.com.devfrancelino.ordemdeservico.domain;
 
 import br.com.devfrancelino.ordemdeservico.domain.enums.Priodidade;
 import br.com.devfrancelino.ordemdeservico.domain.enums.Status;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 
 @Data
+@Entity
 public class OS {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private LocalDateTime dataAbertura;
+
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private LocalDateTime dataFechamento;
     private String observacoes;
     private Integer priodidade;
     private Integer status;
+
+    @ManyToOne
+    @JoinColumn(name = "tecnico_id")
     private Tecnico tecnico;
+
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
     public OS() {
