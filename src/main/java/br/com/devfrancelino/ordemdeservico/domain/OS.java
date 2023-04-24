@@ -4,11 +4,14 @@ import br.com.devfrancelino.ordemdeservico.domain.enums.Priodidade;
 import br.com.devfrancelino.ordemdeservico.domain.enums.Status;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
-@Data
+@Getter
+@Setter
 @Entity
 public class OS {
 
@@ -64,5 +67,18 @@ public class OS {
 
     public void setStatus(Status status) {
         this.status = status.getCod();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OS os = (OS) o;
+        return Objects.equals(id, os.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
