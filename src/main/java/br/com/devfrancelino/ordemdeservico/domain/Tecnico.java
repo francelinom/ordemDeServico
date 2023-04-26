@@ -1,5 +1,6 @@
 package br.com.devfrancelino.ordemdeservico.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import lombok.Data;
@@ -18,6 +19,7 @@ public class Tecnico extends Pessoa implements Serializable {
 
     private static final Long serialVersionUID = 1L;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "tecnico")
     private List<OS> list = new ArrayList<>();
 
