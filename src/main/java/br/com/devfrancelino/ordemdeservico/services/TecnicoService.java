@@ -2,6 +2,7 @@ package br.com.devfrancelino.ordemdeservico.services;
 
 import br.com.devfrancelino.ordemdeservico.domain.Tecnico;
 import br.com.devfrancelino.ordemdeservico.repositories.TecnicoRepository;
+import br.com.devfrancelino.ordemdeservico.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ public class TecnicoService {
     public Tecnico findById(Integer id) {
         Optional<Tecnico> obj = tecnicoRepository.findById(id);
 
-        return obj.orElse(null);
+        return obj.orElseThrow(() -> new ObjectNotFoundException(
+                "Objeto não encontrado! Id: " + id + " Tipo: " + Tecnico.class.getName()));
     }
 }
