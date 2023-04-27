@@ -8,12 +8,15 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.br.CPF;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 @Getter
 @Setter
 @Entity
-public abstract class Pessoa {
+public abstract class Pessoa implements Serializable {
+
+    private static final Long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
