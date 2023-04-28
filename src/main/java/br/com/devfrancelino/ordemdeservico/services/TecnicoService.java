@@ -1,6 +1,7 @@
 package br.com.devfrancelino.ordemdeservico.services;
 
 import br.com.devfrancelino.ordemdeservico.domain.Tecnico;
+import br.com.devfrancelino.ordemdeservico.dto.TecnicoDTO;
 import br.com.devfrancelino.ordemdeservico.repositories.TecnicoRepository;
 import br.com.devfrancelino.ordemdeservico.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,5 +26,10 @@ public class TecnicoService {
 
     public List<Tecnico> findAll() {
         return tecnicoRepository.findAll();
+    }
+
+    public Tecnico create(TecnicoDTO tecnicoDTO) {
+        return tecnicoRepository.save(
+                new Tecnico(null, tecnicoDTO.getNome(), tecnicoDTO.getCpf(), tecnicoDTO.getTelefone()));
     }
 }
