@@ -6,6 +6,8 @@ import br.com.devfrancelino.ordemdeservico.services.exceptions.ObjectNotFoundExc
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -19,5 +21,9 @@ public class TecnicoService {
 
         return obj.orElseThrow(() -> new ObjectNotFoundException(
                 "Objeto não encontrado! Id: " + id + " Tipo: " + Tecnico.class.getName()));
+    }
+
+    public List<Tecnico> findAll() {
+        return tecnicoRepository.findAll();
     }
 }
