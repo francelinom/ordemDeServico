@@ -7,6 +7,7 @@ import br.com.devfrancelino.ordemdeservico.services.exceptions.ObjectNotFoundExc
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -25,4 +26,7 @@ public class ClienteService {
                 "Objeto não encontrado! Id: " + id + " Tipo: " + Cliente.class.getName()));
     }
 
+    public List<Cliente> findAll() {
+        return clienteRepository.findAll();
+    }
 }
