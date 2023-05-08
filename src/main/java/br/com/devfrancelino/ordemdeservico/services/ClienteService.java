@@ -63,4 +63,13 @@ public class ClienteService {
 
         return clienteRepository.save(oldCliente);
     }
+
+    public void delete(Integer id) {
+        Cliente cliente = findById(id);
+
+        if (cliente.getList().size() > 0) {
+            throw new DataIntegratyViolationException("Cliente possui ordem de serviço, não pode ser deletado");
+        }
+        clienteRepository.deleteById(id);
+    }
 }
