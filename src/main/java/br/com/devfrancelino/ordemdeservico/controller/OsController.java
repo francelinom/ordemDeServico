@@ -37,7 +37,12 @@ public class OsController {
         osDTO = new OsDTO(osService.create(osDTO));
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(osDTO.getId()).toUri();
         return ResponseEntity.created(uri).build();
+    }
 
+    @PutMapping
+    public ResponseEntity<OsDTO> update(@Valid @RequestBody OsDTO osDTO) {
+        osDTO = new OsDTO(osService.update(osDTO));
+        return ResponseEntity.ok().body(osDTO);
     }
 
 }

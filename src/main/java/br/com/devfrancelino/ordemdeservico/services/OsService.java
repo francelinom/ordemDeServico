@@ -11,6 +11,7 @@ import br.com.devfrancelino.ordemdeservico.services.exceptions.ObjectNotFoundExc
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,6 +40,11 @@ public class OsService {
         return fromDTO(osDTO);
     }
 
+    public OS update(OsDTO osDTO) {
+        findById(osDTO.getId());
+        return fromDTO(osDTO);
+    }
+
     private OS fromDTO(OsDTO osDTO) {
 
         Tecnico tecnico = tecnicoService.findById(osDTO.getTecnico());
@@ -51,6 +57,10 @@ public class OsService {
         newOs.setStatus(Status.toEnum(osDTO.getStatus()));
         newOs.setTecnico(tecnico);
         newOs.setCliente(cliente);
+
+        if (newOs.getStatus().getCod().equals(2)) {
+            newOs.setDataFechamento(LocalDateTime.now());
+        }
 
         return osRepository.save(newOs);
     }
