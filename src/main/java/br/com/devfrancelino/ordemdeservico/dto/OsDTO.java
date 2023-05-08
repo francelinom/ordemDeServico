@@ -4,6 +4,7 @@ import br.com.devfrancelino.ordemdeservico.domain.Cliente;
 import br.com.devfrancelino.ordemdeservico.domain.OS;
 import br.com.devfrancelino.ordemdeservico.domain.Tecnico;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,6 +24,8 @@ public class OsDTO implements Serializable {
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private LocalDateTime dataFechamento;
     private Integer prioridade;
+
+    @NotEmpty(message = "O campo observações é requerida.")
     private String observacoes;
     private Integer status;
     private Integer tecnico;
