@@ -49,4 +49,18 @@ public class ClienteService {
 
         return null;
     }
+
+    public Cliente update(Integer id, ClienteDTO clienteDTO) {
+        Cliente oldCliente = findById(id);
+
+        if (findCPF(clienteDTO) != null && findCPF(clienteDTO).getId() != id) {
+            throw new DataIntegratyViolationException("CPF já cadastrado na base de dados!");
+        }
+
+        oldCliente.setNome(clienteDTO.getNome());
+        oldCliente.setCpf(clienteDTO.getCpf());
+        oldCliente.setTelefone(clienteDTO.getTelefone());
+
+        return clienteRepository.save(oldCliente);
+    }
 }
