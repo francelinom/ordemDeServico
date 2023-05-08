@@ -1,7 +1,9 @@
 package br.com.devfrancelino.ordemdeservico.services;
 
+import br.com.devfrancelino.ordemdeservico.domain.Pessoa;
 import br.com.devfrancelino.ordemdeservico.domain.Tecnico;
 import br.com.devfrancelino.ordemdeservico.dto.TecnicoDTO;
+import br.com.devfrancelino.ordemdeservico.repositories.PessoaRepository;
 import br.com.devfrancelino.ordemdeservico.repositories.TecnicoRepository;
 import br.com.devfrancelino.ordemdeservico.services.exceptions.DataIntegratyViolationException;
 import br.com.devfrancelino.ordemdeservico.services.exceptions.ObjectNotFoundException;
@@ -17,6 +19,9 @@ public class TecnicoService {
 
     @Autowired
     private TecnicoRepository tecnicoRepository;
+
+    @Autowired
+    private PessoaRepository pessoaRepository;
 
     public Tecnico findById(Integer id) {
         Optional<Tecnico> obj = tecnicoRepository.findById(id);
@@ -51,11 +56,11 @@ public class TecnicoService {
         return tecnicoRepository.save(oldTecnico);
     }
 
-    private Tecnico findByCPF(TecnicoDTO tecnicoDTO) {
-        Tecnico tecnico = tecnicoRepository.findByCPF(tecnicoDTO.getCpf());
+    private Pessoa findByCPF(TecnicoDTO tecnicoDTO) {
+        Pessoa pessoa = pessoaRepository.findByCPF(tecnicoDTO.getCpf());
 
-        if (tecnico != null) {
-            return tecnico;
+        if (pessoa != null) {
+            return pessoa;
         }
 
         return null;
