@@ -3,6 +3,8 @@ package br.com.devfrancelino.ordemdeservico.dto;
 import br.com.devfrancelino.ordemdeservico.domain.Cliente;
 import br.com.devfrancelino.ordemdeservico.domain.OS;
 import br.com.devfrancelino.ordemdeservico.domain.Tecnico;
+import br.com.devfrancelino.ordemdeservico.domain.enums.Priodidade;
+import br.com.devfrancelino.ordemdeservico.domain.enums.Status;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
@@ -45,5 +47,37 @@ public class OsDTO implements Serializable {
         this.status = os.getStatus().getCod();
         this.tecnico = os.getTecnico().getId();
         this.cliente = os.getCliente().getId();
+    }
+
+    public Priodidade getPrioridade() {
+        return Priodidade.toEnum(this.prioridade);
+    }
+
+    public void setPrioridade(Integer prioridade) {
+        this.prioridade = prioridade;
+    }
+
+    public Status getStatus() {
+        return Status.toEnum(this.status);
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Integer getTecnico() {
+        return tecnico;
+    }
+
+    public void setTecnico(Integer tecnico) {
+        this.tecnico = tecnico;
+    }
+
+    public Integer getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Integer cliente) {
+        this.cliente = cliente;
     }
 }
